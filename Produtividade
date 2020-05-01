@@ -1,0 +1,19 @@
+#Produtividade Ubuntu
+
+##Atalhos
+alt + esc = alternar entre as janelas do desktop
+
+Terminal: 
+	ctrl + D = é o mesmo que exit no terminal
+	ctrl + a ou e = vai para inicio ou fim do texto no terminal
+	ctrl + shif + c ou v = copiar e colar no terminal	
+	ctrl + u = apaga o que foi digitado
+
+Workspace
+	super + shift + pagedown = Enviar uma janela para outra workspace	
+	super + shift + pageup = Enviar uma janela para cima
+	super + PGUP = workspace para cima
+	super + PGUP = workspace para baixo
+	super + seta cima = maximiza
+
+

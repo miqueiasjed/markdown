@@ -1,0 +1,76 @@
+#DOCKER
+
+##INSTALAÇÃO
+1 - sudo apt update
+2 - sudo apt install apt-transport-https ca-certificates curl software-properties-common
+3 - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+4 - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+5 - sudo apt update
+6 - apt-cache policy docker-ce
+7 - sudo apt install docker-ce
+8 - sudo systemctl status docker
+
+Docker sem sudo
+sudo usermod -aG docker ${USER} | su - ${USER} | id -nG
+
+##COMANDOS
+
+Clonar repositorio LARADOCK
+	git clone https://github.com/Laradock/laradock.git laradock
+
+Subir novos serviços
+	docker-compose up -d nginx mysql
+
+Reiniciar
+	docker-compose restart
+
+Verificar containers rodando
+	docker ps
+
+##DNS LOCAL
+// na máquina host
+// criar um arquivo de configuração para acessar seu projeto pelo navegador com um DNS local:
+
+$ cd ~/miqueias/projects/laradock/nginx/sites/
+$ cp laravel.conf.example projeto.conf
+
+// Edite o arquivo .conf :
+nano projeto.conf
+
+//As únicas informações que atualizaremos são server_name e root —note que root refere-se ao 
+//caminho dentro do container.
+
+// projeto.conf
+server {
+listen 80;
+    listen [::]:80;
+server_name projeto.test;
+    root /var/www/projeto/public;
+    index index.php index.html index.htm;
+...
+
+
+//Na máquina host, reinicie os containers para que a mudança faça refeito:
+
+$ cd ~/miqueias/projects/laradock/
+$ docker-compose restart
+
+
+//Adicione uma linha com o server_name no arquivo hosts da máquina host e salve o arquivo.
+
+$ sudo nano /etc/hosts
+// arquivo /etc/hosts
+...
+127.0.0.1       projeto.test
+
+##Configure o MySQL no Laravel
+
+$ cd ~/projects/meu-projeto
+$ nano .env
+...
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=meu-projeto
+DB_USERNAME=root
+DB_PASSWORD=root
