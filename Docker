@@ -87,4 +87,6 @@ numprocs=1
 user=laradock
 redirect_stderr=true
 
-e depois docker-composer restart php-worker
+e depois docker-compose restart php-worker
+
+docker-compose exec workspace bash
